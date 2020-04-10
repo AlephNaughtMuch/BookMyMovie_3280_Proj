@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>The Hangover</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/Movie.css" />
+
+</head>
+
+<body>
+    <div class="topnav" id="header">
+        <div id="navpos">
+            <a class="item" href="Movies.html">Movies</a>
+            <a class="item" href="Plays.html">Plays</a>
+            <a href="index.html" id="logo">Book <br>My Entertainment</a>
+            <a class="item" href="Concerts.html">Concerts</a>
+            <a class="item" href="Sports.html">Sports</a>
+        </div>
+    </div>
+    <br><br>
+    <div class="container">
+        <div class="row">
+            <div class="col-sm-4"><img id="poster">
+
+                &nbsp; &nbsp;
+            </div>
+
+            <div class="col-sm-4" id="description">
+                <h2 id="title"></h2>
+                <p id="language"></p>
+                <p id="runtime"></p>
+                <p id="rated"></p>
+                <p id="genre"></p>
+                <h3>Summary</h3>
+                <p id="summary"></p>
+                <h3>Cast</h3>
+                <p id="cast"></p>
+                <h3>Crew</h3>
+                <p id="crew"></p>
+            </div>
+            <div class="col-sm-4" id="booknow">
+                <form action="/Seat.html">
+                    <div class="form-group">
+                        <h2 id="title">Book Now</h2>
+                        <label for="Theatre">Please select the Theatre:</label>
+                        <select id="theatres" name="theatres">
+                            <option value="LandmarkCinemas">Landmark Cinemas</option>
+                            <option value="CineplexMetrotown">Cineplex Metrotown</option>
+                        </select>
+                    </div>
+                    <br>
+
+                    <div class="form-group">
+                        <label for="date">Please select the date:</label>
+                        <input type="date" class="form-control" id="date">
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="Time">Please select the Time: </label>
+                        <select id="time" name="time">
+                            <option value="3:00PM">3:00PM</option>
+                            <option value="8:30PM">8:30pm</option>
+                        </select>
+                    </div>
+                    <br>
+                    <div class="form-group">
+                        <label for="seats">Please select number of seats: </label>
+                        <select id="seat" name="seat">
+                            <option value="1">1</option>
+                            <option value="2">2</option>
+                            <option value="3">3</option>
+                            <option value="4">4</option>
+                            <option value="5">5</option>
+                        </select>
+                    </div>
+                    <br>
+
+                    <button type="submit" id="booknow" class="btn btn-primary">Book Now</button>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+
+        var ajaxRequest = new XMLHttpRequest();
+
+        var key = 'tt1119646';
+
+        //prepare the request 
+        ajaxRequest.open("GET", "https://www.omdbapi.com/?apikey=1c427ac2&i=tt1119646", true);
+
+        //send request to api
+
+        ajaxRequest.send();
+        //assess whether the response is ready
+        ajaxRequest.onreadystatechange = function () {
+            document.getElementById("booknow").onclick = function () {
+
+
+                var theatre =  $("#theatres option:selected").text();
+                var date = document.getElementById("date").value;
+                var time =  $("#time option:selected").text();
+                var seats =  $("#seat option:selected").text();
+
+                // Check browser support
+                if (typeof (Storage) !== "undefined") {
+                    // Store
+                    localStorage.setItem("Theatre",theatre);
+                    localStorage.setItem("Date",date);
+                    localStorage.setItem("Time",time);
+                    localStorage.setItem("Seats",seats);
+
+                    // Retrieve
+                  
+                } else {
+                    document.getElementById("result").innerHTML = "Sorry, your browser does not support Web Storage...";
+                }
+
+
+
+            };
+
+            if ((ajaxRequest.status == 200) && (ajaxRequest.readyState == 4)) {
+                var arrJSON = new Array();
+
+                arrJSON = JSON.parse(ajaxRequest.responseText);
+
+                console.log(arrJSON);
+
+                document.getElementById("poster").src = arrJSON["Poster"];
+                document.getElementById("title").innerHTML = arrJSON["Title"];
+                document.getElementById("language").innerHTML = "Language : " + arrJSON["Language"];
+                document.getElementById("runtime").innerHTML = "Runtime : " + arrJSON["Runtime"];
+                document.getElementById("rated").innerHTML = "Rated   : " + arrJSON["Rated"];
+                document.getElementById("genre").innerHTML = "Genre : " + arrJSON["Genre"];
+                document.getElementById("summary").innerHTML = arrJSON["Plot"];
+                document.getElementById("cast").innerHTML = arrJSON["Actors"];
+                document.getElementById("crew").innerHTML = arrJSON["Director"];
+
+
+            }
+
+        }
+
+
+
+    </script>
+
+</body>
+
+</html>

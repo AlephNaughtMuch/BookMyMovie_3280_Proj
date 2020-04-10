@@ -1,0 +1,63 @@
+
+Project - Ticketmaster style booking system
+
+
+Entities->
+	1. User
+	2. Booking
+	3. Event
+	4. Extra stuff / Subscription services *still not decided*
+
+
+Responsibilities->
+	1. User -> Maksim
+	2. Booking -> Shubham
+	3. Event -> Luis
+	4. Extra stuff / Subscription services -> Currently under Maksim
+											  **Could change later**
+
+
+--------------------------------------------------------------
+Meetings->
+
+1st Meeting - March 27th 2020
+			  Everybody present
+			  
+
+---------------------------------------------------------------
+Required cardinalities as follows->
+
+	1:1 --> User and User Info
+	1:N --> Many users and one Event
+	M:N --> Many events can be in many bookings
+	
+---------------------------------------------------------------
+Two technologies that are not covered in class->
+	
+	1. Maksim is going to ask about an API to retrieve the data on 
+	   current movies.
+	2. HTML5 Geolocation
+	3. Firebase - as a backup to maybe store user profile images.
+----------------------------------------------------------------
+Extra feautre:
+	1. Email booking confirmation system.
+
+----------------------------------------------------------------
+EVENT
+	-Name
+	-Location
+	-Starting time
+	-Duration
+	-Event type
+	=Book
+----------------------------------------------------------------
+PROCESS FLOW:
+
+1. Front page (Log-in or Register)
+2.1. User Log-in
+2.2. User Registration
+3. List of all events (User select events they want to attend -> user clicks BOOK at the bottom)
+4. Seat selection for selected events ( Book button -> final button )
+5. User is shown the confirmation with all details listed.
+ 
+

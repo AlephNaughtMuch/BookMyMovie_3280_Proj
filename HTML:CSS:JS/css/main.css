@@ -1,0 +1,42 @@
+
+body {
+  background-image: radial-gradient(circle, #f2f7f9, #b0ddf9, #70c0fd, #30a0ff, #057bfb);
+  text-align: center;
+  font-family: Montserrat,Bold;
+
+
+}
+
+.topnav {
+    overflow: hidden;
+    text-align: center;
+    background:black;
+  }
+
+  .topnav a {
+    float: left;
+    color: white;
+    padding: 50px 50px;
+    text-decoration: none;
+    font-size: 26px;
+    position: relative;
+    font-family: Montserrat,Bold;
+  }
+  .topnav a:hover{
+
+    transform: translate3d(0,-10px,0);
+    text-shadow: 1px 0 rgb(255, 255, 255);
+    
+  }
+  #navpos{
+    display: inline-block;
+    
+  }
+  
+#logo {
+  font-size: 30px;
+  text-align: center;
+  padding-top: 30px;
+}
+
+   
